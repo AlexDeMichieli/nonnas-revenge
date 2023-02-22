@@ -1,0 +1,30 @@
+# Ignore compiled Python files
+*.pyc
+__pycache__/
+
+# Ignore environment files
+.env
+
+# Ignore node_modules
+node_modules/
+
+# Ignore build and output directories
+build/
+dist/
+*.egg-info/
+*.egg
+.DS_Store
+*.DS_Store
+
+# Ignore React build directory
+frontend/build/
+
+# Ignore Django migration files
+**/migrations/
+
+# Ignore local database files
+db.sqlite3
+
+# Ignore secret key files
+secret.key
+secret.txt
