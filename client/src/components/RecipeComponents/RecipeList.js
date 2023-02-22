@@ -1,6 +1,5 @@
 import {useEffect, useState } from "react";
 import client from "../../utils/client";
-import { UserContext } from '../../utils/setContext';
 import RecipeCard from "./RecipeCard";
 import Search from "./Search";
 
@@ -31,7 +30,6 @@ const RecipeList = () => {
             try {
                 const response = await client.get("/api/get_recipes");
                 setRecipes(response.data);
-                console.log(response.data)
             } catch (error) {
                 console.error(error);
             }
