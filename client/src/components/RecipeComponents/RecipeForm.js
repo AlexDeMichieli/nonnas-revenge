@@ -1,24 +1,13 @@
 import React, { useContext, useState } from "react";
-import client from "../../utils/client"
 
+import client from "../../utils/client"
 import { UserContext } from "../../utils/setContext";
-import Grid from '@mui/material/Grid';
-import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
+
+import { InputLabel, OutlinedInput, Button, Typography, Paper, Box, Grid, Stack, TextField, MenuItem, ListItemText, Select, FormControl, Checkbox } from '@mui/material';
 import IconButton from "@mui/material/IconButton";
-import Stack from '@mui/material/Stack';
 import { AddCircleOutline, RemoveCircleOutline } from "@mui/icons-material";
-import TextField from '@mui/material/TextField';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import ListItemText from '@mui/material/ListItemText';
-import Select from '@mui/material/Select';
-import Checkbox from '@mui/material/Checkbox';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+
 
 
 const theme = createTheme({

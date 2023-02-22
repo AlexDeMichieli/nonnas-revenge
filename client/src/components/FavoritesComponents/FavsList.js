@@ -1,5 +1,6 @@
 import { React, useEffect, useState, useContext } from 'react'
 import { UserContext } from '../../utils/setContext';
+
 import FavsCard from "./FavsCard"
 import client from '../../utils/client';
 import Grid from '@mui/material/Grid';
@@ -21,7 +22,6 @@ const FavsList = () => {
   }, []);
 
   const handleUpdateRecipe = (updatedRecipe) => {
-    console.log(updatedRecipe)
     const updatedRecipes = recipes.map((recipe) =>
       recipe.recipe === updatedRecipe.recipe ? updatedRecipe : recipe
     );
