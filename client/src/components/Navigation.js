@@ -49,9 +49,9 @@ const Navigation = ({ isAuthenticated }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <AppBar position="static" color="primary">
+      <AppBar position="static" className='appbar' color="primary">
         <Toolbar>
-          <Typography className="strong-hover-shake" variant="h6" style={{ flexGrow: 1 }}>
+          <Typography className="site-title strong-hover-shake" variant="h6" style={{ flexGrow: 1 }}>
             Nonna's Revenge
           </Typography>
           <Button component={Link} to="/" color="inherit">

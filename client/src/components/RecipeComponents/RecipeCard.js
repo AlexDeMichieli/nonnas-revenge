@@ -1,11 +1,13 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, createRef } from 'react';
 import client from '../../utils/client';
 import { UserContext } from "../../utils/setContext";
+import Pdf from "react-to-pdf";
 
 import { Card, Button, Rating, Box, Modal, CardContent, TextField, Typography, Grid } from '@mui/material';
 import HeartBrokenIcon from '@mui/icons-material/HeartBroken';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 
 const style = {
   position: 'absolute',
@@ -28,6 +30,7 @@ const RecipeCard = ({ image, author, date_published, introduction, ingredients, 
   const [comments, setComments] = useState([]);
   const [content, setContent] = useState('');
   const [open, setOpen] = useState(false);
+  const ref = createRef();
 
 
   const handleOpen = () => setOpen(true);
@@ -114,10 +117,10 @@ const RecipeCard = ({ image, author, date_published, introduction, ingredients, 
       });
   }
 
-
   return (
+    
     <Grid key={id} item xs={12} sm={6} md={4} sx={{ p: 1 }}>
-      <Card>
+      <Card ref={ref}>
         <img src={imageUrl} alt={introduction} />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
@@ -149,6 +152,9 @@ const RecipeCard = ({ image, author, date_published, introduction, ingredients, 
             )}>
               Share
             </Button>
+            <Pdf targetRef={ref} filename={introduction}>
+              {({ toPdf }) => <Button variant="contained" startIcon={<PictureAsPdfIcon/>} onClick={toPdf}>Download</Button>}
+            </Pdf>
             <Rating
               name="simple-controlled"
               value={value}
@@ -171,8 +177,8 @@ const RecipeCard = ({ image, author, date_published, introduction, ingredients, 
               </Typography>
               {comments.map((comment, idx) => (
                 <div key={idx}>
-                   <Typography variant="body2" color="text.secondary" sx={{ mt: 2 }}>
-                   Author: {comment.author}
+                  <Typography variant="body2" color="text.secondary" sx={{ mt: 2 }}>
+                    Author: {comment.author}
                   </Typography>
                   <Typography variant="body2" color="text.secondary" sx={{ mt: 2 }}>
                     {comment.text}

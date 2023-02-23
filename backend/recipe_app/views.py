@@ -25,6 +25,16 @@ def create_recipe(request, format=None):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_recipe(request, pk, format=None):
+    try:
+        recipe = Recipe.objects.get(pk=pk)
+    except Recipe.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    serializer = RecipeSerializer(recipe)
+    return Response(serializer.data)
+
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def search_recipes(request, format=None):

@@ -72,7 +72,7 @@ const FavsCard = ({ author, datePublished, image, ingredients, instructions, int
           <Typography variant="body1" color="textSecondary" component="p">
             {introduction}
           </Typography>
-          <Typography sx={{ mt: 3, mb: 2 }} variant="body2" color="textSecondary" component="div">
+          <Typography sx={{ mt: 3, mb: 2 }} variant="body1" color="textSecondary" component="div">
             Ingredients: {ingredients.split('\n').map((ingredient, index) => <div key={index}>{ingredient}</div>)}
           </Typography>
           <Typography variant="body1" color="textPrimary" component="p">
