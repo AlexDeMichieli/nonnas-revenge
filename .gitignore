@@ -1,7 +1,7 @@
 # Ignore compiled Python files
 *.pyc
 __pycache__/
-
+*.jpg
 # Ignore environment files
 .env
 
