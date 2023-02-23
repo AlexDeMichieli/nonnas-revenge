@@ -25,13 +25,13 @@ const theme = createTheme({
 
 const authLinks = (
   <div>
-    <Button component={Link} to="/recipeform" color="inherit">
+    <Button className='nav-link' component={Link} to="/recipeform" color="inherit">
       Create
     </Button>
-    <Button component={Link} to="/list" color="inherit">
+    <Button className='nav-link' component={Link} to="/list" color="inherit">
       Recipes
     </Button>
-    <Button component={Link} to="/favs" color="inherit">
+    <Button className='nav-link' component={Link} to="/favs" color="inherit">
       Favs
     </Button>
   </div>
@@ -54,7 +54,7 @@ const Navigation = ({ isAuthenticated }) => {
           <Typography className="site-title strong-hover-shake" variant="h6" style={{ flexGrow: 1 }}>
             Nonna's Revenge
           </Typography>
-          <Button component={Link} to="/" color="inherit">
+          <Button className='nav-link' component={Link} to="/" color="inherit">
             Login
           </Button>
           {authStatus && authLinks}

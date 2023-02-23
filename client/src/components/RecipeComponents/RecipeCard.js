@@ -50,6 +50,7 @@ const RecipeCard = ({ image, author, date_published, introduction, ingredients, 
       console.error(error);
     }
   };
+
   const handleBookmarkToggle = (e, id) => {
 
     const config = {
@@ -118,8 +119,8 @@ const RecipeCard = ({ image, author, date_published, introduction, ingredients, 
   }
 
   return (
-    
-    <Grid key={id} item xs={12} sm={6} md={4} sx={{ p: 1 }}>
+
+    <Grid key={id} item xs={12} sm={6} md={4} sx={{ p: 4 }}>
       <Card ref={ref}>
         <img src={imageUrl} alt={introduction} />
         <CardContent>
@@ -153,7 +154,7 @@ const RecipeCard = ({ image, author, date_published, introduction, ingredients, 
               Share
             </Button>
             <Pdf targetRef={ref} filename={introduction}>
-              {({ toPdf }) => <Button variant="contained" startIcon={<PictureAsPdfIcon/>} onClick={toPdf}>Download</Button>}
+              {({ toPdf }) => <Button variant="contained" startIcon={<PictureAsPdfIcon />} onClick={toPdf}>Download</Button>}
             </Pdf>
             <Rating
               name="simple-controlled"
@@ -164,7 +165,7 @@ const RecipeCard = ({ image, author, date_published, introduction, ingredients, 
           </Grid>
         </CardContent>
         <div>
-          <Button fullWidth color='secondary' variant='contained' onClick={handleOpen}>Add and check comments!</Button>
+          <Button fullWidth color='info' variant='contained' onClick={handleOpen}>Add and check comments!</Button>
           <Modal
             open={open}
             onClose={handleClose}
@@ -216,7 +217,6 @@ const RecipeCard = ({ image, author, date_published, introduction, ingredients, 
       <Grid>
       </Grid>
     </Grid>
-
   );
 };
 

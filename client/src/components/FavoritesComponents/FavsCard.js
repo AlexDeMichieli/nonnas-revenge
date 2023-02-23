@@ -10,11 +10,10 @@ const theme = createTheme({
       main: "#4d243dff"
     },
     secondary: {
-      main: "#ecdcc9ff"
+      main: "#d0a98fff"
     }
   }
 });
-
 
 const FavsCard = ({ author, datePublished, image, ingredients, instructions, introduction, id, onUpdateRecipe }) => {
 

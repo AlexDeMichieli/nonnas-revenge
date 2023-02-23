@@ -9,17 +9,17 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 
 const theme = createTheme({
-    root: {
-        backgroundColor: "var(--wheat)",
-        padding: "16px",
-    },
     palette: {
         primary: {
             main: '#edd4b2ff'
         },
         secondary: {
             main: '#d0a98fff'
-        }
+        },
+        info: {
+            main: '#4d243dff'
+          },
+        spacing: 4,
     }
 });
 
@@ -41,7 +41,7 @@ const RecipeList = () => {
 
     return (
         <ThemeProvider theme={theme}>
-            <Grid container justifyContent="center" alignItems="center" sx={{ mb: 5 }}>
+            <Grid container justifyContent="center" alignItems="center" sx={{ mb: 5}}>
             <Search setRecipes={setRecipes} />
             </Grid>
             {recipes.map((recipe) => (

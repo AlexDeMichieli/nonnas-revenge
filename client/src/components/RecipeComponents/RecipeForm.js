@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useReducer } from "react";
 
 import client from "../../utils/client"
 import { UserContext } from "../../utils/setContext";
@@ -6,6 +6,8 @@ import { UserContext } from "../../utils/setContext";
 import { InputLabel, OutlinedInput, Button, Typography, Paper, Box, Grid, Stack, TextField, MenuItem, ListItemText, Select, FormControl, Checkbox } from '@mui/material';
 import IconButton from "@mui/material/IconButton";
 import { AddCircleOutline, RemoveCircleOutline } from "@mui/icons-material";
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+import ImageIcon from '@mui/icons-material/Image';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const theme = createTheme({
@@ -14,7 +16,7 @@ const theme = createTheme({
       main: "#4d243dff"
     },
     secondary: {
-      main: "#ecdcc9ff"
+      main: "#d0a98fff"
     }
   }
 });
@@ -43,45 +45,69 @@ const tagNames = [
   'low-carb'
 ];
 
+const initialIngredientsState = [{ name: "", measurement: "", unit: "" }];
+
+const ingredientsReducer = (state, action) => {
+  switch (action.type) {
+    case "ADD_INGREDIENT":
+      return [...state, { name: "", measurement: "", unit: "" }];
+    case "REMOVE_INGREDIENT":
+      const newState = [...state];
+      newState.splice(action.payload, 1);
+      return newState;
+    case "UPDATE_INGREDIENT":
+      const { index, name, value } = action.payload;
+      const updatedState = [...state];
+      updatedState[index][name] = value;
+      return updatedState;
+    default:
+      return state;
+  }
+};
+
 const RecipeForm = () => {
   const [image, setImage] = useState(null);
   const [author, setAuthor] = useState("");
   const [datePublished, setDatePublished] = useState("");
   const [intro, setIntro] = useState("");
-  const [ingredients, setIngredients] = useState([
-    { name: '', measurement: '', unit: '' }
-  ]);
+  const [ingredients, dispatchIngredients] = useReducer(
+    ingredientsReducer,
+    initialIngredientsState
+  );
   const [instructions, setInstructions] = useState("");
   const [tags, setTags] = useState([]);
 
   const username = useContext(UserContext)
 
+
   const handleImageChange = (e) => {
     setImage(e.target.files[0]);
   };
 
-  const handleIngredientsChange = (index, event) => {
-    const { name, value } = event.target;
-    const list = [...ingredients];
-    list[index][name] = value;
-    setIngredients(list);
-  };
-  
-
   const handleAddIngredient = () => {
-    setIngredients([...ingredients, { name: '', measurement: '', unit: '' }]);
+    dispatchIngredients({ type: "ADD_INGREDIENT" });
   };
 
   const handleRemoveIngredient = (index) => {
-    const newIngredients = [...ingredients];
-    newIngredients.splice(index, 1);
-    setIngredients(newIngredients);
+    dispatchIngredients({ type: "REMOVE_INGREDIENT", payload: index });
+  };
+
+  const handleIngredientsChange = (index, event) => {
+    const { name, value } = event.target;
+    dispatchIngredients({
+      type: "UPDATE_INGREDIENT",
+      payload: { index, name, value },
+    });
   };
 
   const handleSubmit = (e) => {
 
     e.preventDefault();
     const formData = new FormData();
+    if(!image){
+      alert('You forgot to add an image!')
+      return
+    }
     formData.append("image", image);
     formData.append("author", author);
     formData.append("date_published", datePublished);
@@ -118,7 +144,8 @@ const RecipeForm = () => {
           <Typography variant="body2" align='center' color="textSecondary" component="p">Recipe magic for you, {username.user}!</Typography>
           <form onSubmit={handleSubmit}>
             <Grid sx={{ mt: 4, mb: 5 }} container justifyContent="space-around" alignItems="baseline" >
-              <Button variant="contained" component="label">
+              
+              <Button  startIcon={ !image ? <AddPhotoAlternateIcon/> : <ImageIcon/>}  variant="contained" component="label">
                 Upload Image
                 <input
                   hidden

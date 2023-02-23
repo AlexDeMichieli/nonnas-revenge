@@ -21,15 +21,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.appbar .site-title{
-  font-weight: 700;
+.appbar .site-title, .nav-link {
+  font-weight: 700 !important;
 }
 
-.background{
-width: 100vw;
-  background-image:
-url("../public/spaghetti.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-}
+
