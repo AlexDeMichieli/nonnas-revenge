@@ -147,7 +147,7 @@ const RecipeCard = ({ image, author, date_published, introduction, ingredients, 
               <Button variant="contained" endIcon={<FavoriteIcon />} onClick={(e) => handleBookmarkToggle(e, id)}> Mark as Fav! </Button>
             )
             }
-            <Button sx={{ width: 100 }} variant="contained" startIcon={<FacebookIcon />} onClick={() => window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent("https://www.google.com/"), 'popUpWindow', 'height=500,width=400,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes'
+            <Button sx={{ width: 100 }} variant="contained" startIcon={<FacebookIcon />} onClick={() => window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(`${image}`), 'popUpWindow', 'height=500,width=400,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes'
             )}>
               Share
             </Button>
