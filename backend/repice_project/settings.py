@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-+@82hol!&p93*jnz!971qcmf!(+c%x=upe5weyz_5_z$+7s26e'
 CORS_ORIGIN_ALLOW_ALL = True
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['0.0.0.0', '20.245.52.162']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -47,7 +47,9 @@ INSTALLED_APPS = [
     # 'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
     #
-    'recipe_app'
+    'recipe_app',
+    'cloudinary_storage',
+    'cloudinary',    
 ]
 
 MIDDLEWARE = [
@@ -127,9 +129,13 @@ WSGI_APPLICATION = 'repice_project.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.environ.get("NAME"),
+        "USER": os.environ.get("USER"),
+        "PASSWORD": os.environ.get("PASSWORD"),
+        "HOST": os.environ.get("HOST"),
+        "PORT": os.environ.get("PORT"),
     }
 }
 
@@ -168,11 +174,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
-
 MEDIA_URL = '/media/'
+STATIC_URL = '/django_static/' 
+STATIC_ROOT = BASE_DIR / 'django_static'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dviqks9l5',
+    'API_KEY': '441998462967812',
+    'API_SECRET': 'OsL3GvhjI1MZ1hejeP6EV4sBZh0'
+}

@@ -3,11 +3,12 @@ FROM node:16-alpine
 WORKDIR /app
 # copies package.json into the current workdir application
 COPY package.json .
+COPY yarn.lock .
 #    source (package.json)      destination (.)
 # for volumes - to track changes
 ENV PATH /app/node_modules/.bin:$PATH
 # installs dependencies
-RUN npm install
+RUN yarn install
 # copies everything inside app 
 COPY . .
 ## Production

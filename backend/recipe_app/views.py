@@ -1,6 +1,6 @@
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
-
+import cloudinary
 
 #--> Rest
 from rest_framework.permissions import IsAuthenticated
@@ -9,6 +9,16 @@ from rest_framework import serializers, status
 from .serializers import *
 from rest_framework.response import Response
 #-->
+
+class RecipeSerializer(serializers.ModelSerializer):
+    cloudinary_image_url = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Recipe
+        fields = ('id', 'image', 'author', 'date_published', 'introduction', 'ingredients', 'instructions', 'bookmarked', 'rating', 'tags', 'cloudinary_image_url')
+
+    def get_cloudinary_image_url(self, obj):
+        return cloudinary.api.resource(obj.image.name)['url']
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])

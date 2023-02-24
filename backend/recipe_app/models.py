@@ -13,7 +13,7 @@ class Recipe(models.Model):
     tags = models.ManyToManyField('Tag', null=True, blank=True)
 
     def __str__(self):
-        return f"{self.introduction} - {self.date_published}"
+        return f"{self.introduction} - {self.date_published} - {self.id}"
 
 
 class Tag(models.Model):
