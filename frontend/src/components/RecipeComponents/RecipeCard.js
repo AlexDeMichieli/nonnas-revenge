@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useContext, createRef } from 'react';
 import client from '../../utils/client';
 import { UserContext } from "../../utils/setContext";
-import Pdf from "react-to-pdf";
 
 import { Card, Button, Rating, Box, Modal, CardContent, TextField, Typography, Grid } from '@mui/material';
 import HeartBrokenIcon from '@mui/icons-material/HeartBroken';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 const style = {
   position: 'absolute',
@@ -116,10 +117,21 @@ const RecipeCard = ({ image, author, date_published, introduction, ingredients, 
       });
   }
 
+  const printDocument = () => {
+    const input = document.getElementById("divToPrint");
+    html2canvas(input).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF();
+      pdf.addImage(imgData, "JPEG", 0, 0);
+      // pdf.output('dataurlnewwindow');
+      pdf.save("download.pdf");
+    });
+  };
+
   return (
 
     <Grid key={id} item xs={12} sm={6} md={4} sx={{ p: 4 }}>
-      <Card ref={ref}>
+      <Card  id="divToPrint" ref={ref}>
         <img src={image} alt={introduction} />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
@@ -151,9 +163,7 @@ const RecipeCard = ({ image, author, date_published, introduction, ingredients, 
             )}>
               Share
             </Button>
-            <Pdf targetRef={ref} filename={introduction}>
-              {({ toPdf }) => <Button variant="contained" startIcon={<PictureAsPdfIcon />} onClick={toPdf}>Download</Button>}
-            </Pdf>
+              <Button variant="contained" startIcon={<PictureAsPdfIcon />} onClick={printDocument}>Download</Button>
             <Rating
               name="simple-controlled"
               value={value}

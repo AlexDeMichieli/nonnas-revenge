@@ -8,7 +8,6 @@ COPY yarn.lock .
 # for volumes - to track changes
 ENV PATH /app/node_modules/.bin:$PATH
 # installs dependencies
-RUN yarn install
 # copies everything inside app 
 COPY . .
 ## Production
