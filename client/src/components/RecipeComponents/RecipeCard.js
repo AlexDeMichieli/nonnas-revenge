@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext, createRef } from 'react';
 import client from '../../utils/client';
 import { UserContext } from "../../utils/setContext";
-import Pdf from "react-to-pdf";
 
 import { Card, Button, Rating, Box, Modal, CardContent, TextField, Typography, Grid } from '@mui/material';
 import HeartBrokenIcon from '@mui/icons-material/HeartBroken';
@@ -151,9 +150,9 @@ const RecipeCard = ({ image, author, date_published, introduction, ingredients, 
             )}>
               Share
             </Button>
-            <Pdf targetRef={ref} filename={introduction}>
+            {/* <Pdf targetRef={ref} filename={introduction}>
               {({ toPdf }) => <Button variant="contained" startIcon={<PictureAsPdfIcon />} onClick={toPdf}>Download</Button>}
-            </Pdf>
+            </Pdf> */}
             <Rating
               name="simple-controlled"
               value={value}
