@@ -1,6 +1,6 @@
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
-import cloudinary
+
 
 #--> Rest
 from rest_framework.permissions import IsAuthenticated
@@ -10,16 +10,16 @@ from .serializers import *
 from rest_framework.response import Response
 #-->
 
-class RecipeSerializer(serializers.ModelSerializer):
-    cloudinary_image_url = serializers.SerializerMethodField()
-
-    class Meta:
-        model = Recipe
-        fields = ('id', 'image', 'author', 'date_published', 'introduction', 'ingredients', 'instructions', 'bookmarked', 'rating', 'tags', 'cloudinary_image_url')
-
-    def get_cloudinary_image_url(self, obj):
-        return cloudinary.api.resource(obj.image.name)['url']
-
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_recipe(request, pk, format=None):
+    try:
+        recipe = Recipe.objects.get(pk=pk)
+    except Recipe.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    serializer = RecipeSerializer(recipe)
+    return Response(serializer.data)
+    
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def create_recipe(request, format=None):
@@ -34,16 +34,6 @@ def create_recipe(request, format=None):
             recipe.tags.add(tag)  
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-@api_view(['GET'])
-@permission_classes([IsAuthenticated])
-def get_recipe(request, pk, format=None):
-    try:
-        recipe = Recipe.objects.get(pk=pk)
-    except Recipe.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
-    serializer = RecipeSerializer(recipe)
-    return Response(serializer.data)
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])

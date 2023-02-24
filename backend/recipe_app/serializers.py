@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import *
+import cloudinary
 
 
 class TagSerializer(serializers.ModelSerializer):
@@ -13,9 +14,12 @@ class RecipeSerializer(serializers.ModelSerializer):
         slug_field='name',
         queryset=Tag.objects.all()
     )
+
     class Meta:
         model = Recipe
         fields = '__all__'
+
+
 
 class FavoriteSerializer(serializers.ModelSerializer):
     class Meta:
