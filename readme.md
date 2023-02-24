@@ -27,10 +27,16 @@ python3 manage.py runserver
 
 Navigate to the client directory, install dependencies and start the project.
 
-```python
+```bash
 cd client
 yarn install
 npm start
+```
+
+if this fails
+
+```bash
+yarn install
 ```
 
 # Features
