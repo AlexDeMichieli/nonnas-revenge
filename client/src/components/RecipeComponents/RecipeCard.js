@@ -22,7 +22,7 @@ const style = {
 };
 
 const RecipeCard = ({ image, author, date_published, introduction, ingredients, instructions, bookmarked, rating, tags, id }) => {
-
+  console.log(image)
   const baseUrl = "http://localhost:8000";
   const imageUrl = `${baseUrl}${image}`;
   const [isBookmarked, setIsBookmarked] = useState(bookmarked);
@@ -122,7 +122,7 @@ const RecipeCard = ({ image, author, date_published, introduction, ingredients, 
 
     <Grid key={id} item xs={12} sm={6} md={4} sx={{ p: 4 }}>
       <Card ref={ref}>
-        <img src={imageUrl} alt={introduction} />
+        <img src={image} alt={introduction} />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             {introduction}

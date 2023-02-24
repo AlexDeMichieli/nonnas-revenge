@@ -18,9 +18,6 @@ const theme = createTheme({
 const FavsCard = ({ author, datePublished, image, ingredients, instructions, introduction, id, onUpdateRecipe }) => {
 
   const [multiplier, setMultiplier] = useState(1);
-  const baseUrl = "http://localhost:8000";
-  const imageUrl = `${baseUrl}${image}`;
-
   const handleScalingFactorChange = (event) => {
     setMultiplier(event.target.value);
   };
@@ -62,7 +59,7 @@ const FavsCard = ({ author, datePublished, image, ingredients, instructions, int
         />
         <CardMedia
           style={{ height: 0, paddingTop: '56.25%' }}
-          image={imageUrl}
+          image={image}
         />
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
