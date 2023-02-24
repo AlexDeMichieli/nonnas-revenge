@@ -1,6 +1,6 @@
 ## Instructions
 
-## Backend
+### Backend
 
 Create a virtual environment, activate it and install dependencies:
 
@@ -23,7 +23,7 @@ Start the server
 python3 manage.py runserver
 ```
 
-# Client
+## Client
 
 Navigate to the client directory, install dependencies and start the project.
 
@@ -32,3 +32,13 @@ cd client
 yarn install
 npm start
 ```
+
+# Features
+
+- Use context-app . User loaded in app.js and persistent in RecipeCard component.
+- Use context API. List of bookmarked at Favlist.js
+- refresh tokens
+- full backend in django
+- images hosted on CDN
+- search multiple keywords
+- share recipe online

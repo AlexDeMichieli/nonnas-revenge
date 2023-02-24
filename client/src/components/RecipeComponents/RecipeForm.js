@@ -5,9 +5,10 @@ import { UserContext } from "../../utils/setContext";
 
 import { InputLabel, OutlinedInput, Button, Typography, Paper, Box, Grid, Stack, TextField, MenuItem, ListItemText, Select, FormControl, Checkbox } from '@mui/material';
 import IconButton from "@mui/material/IconButton";
+import ImageIcon from '@mui/icons-material/Image';
 import { AddCircleOutline, RemoveCircleOutline } from "@mui/icons-material";
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
-import ImageIcon from '@mui/icons-material/Image';
+import { CircularProgress } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const theme = createTheme({
@@ -76,7 +77,8 @@ const RecipeForm = () => {
   );
   const [instructions, setInstructions] = useState("");
   const [tags, setTags] = useState([]);
-
+  const [isLoading, setIsLoading] = useState(false);
+  const [buttonText, setButtonText] = useState('Submit Recipe');
   const username = useContext(UserContext)
 
 
@@ -108,6 +110,8 @@ const RecipeForm = () => {
       alert('You forgot to add an image!')
       return
     }
+    setIsLoading(true);
+    setButtonText('Creating Recipe...');
     formData.append("image", image);
     formData.append("author", author);
     formData.append("date_published", datePublished);
@@ -122,9 +126,13 @@ const RecipeForm = () => {
     client.post("/api/create/", formData)
       .then((response) => {
         console.log(response);
+        setIsLoading(false);
+        setButtonText('Recipe Created!');
       })
       .catch((error) => {
         console.error(error);
+        setIsLoading(false);
+        setButtonText('Error Creating Recipe');
       });
   };
 
@@ -270,8 +278,17 @@ const RecipeForm = () => {
               </Select>
             </FormControl >
             <br />
-            <Button type='submit' sx={{ mb: 3, width: 300 }} color="secondary" variant="contained">Submit</Button>
-          </form>
+            <Button
+              variant="contained"
+              color="primary"
+              type="submit"
+              disabled={isLoading}
+              startIcon={!isLoading ? <AddCircleOutline /> : null}
+            >
+              {buttonText}
+              {isLoading && <CircularProgress size={24} />}
+            </Button>          
+            </form>
         </Box>
       </Paper>
     </ThemeProvider>

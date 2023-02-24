@@ -22,9 +22,7 @@ const style = {
 };
 
 const RecipeCard = ({ image, author, date_published, introduction, ingredients, instructions, bookmarked, rating, tags, id }) => {
-  console.log(image)
-  const baseUrl = "http://localhost:8000";
-  const imageUrl = `${baseUrl}${image}`;
+
   const [isBookmarked, setIsBookmarked] = useState(bookmarked);
   const [value, setValue] = useState(rating);
   const [comments, setComments] = useState([]);
