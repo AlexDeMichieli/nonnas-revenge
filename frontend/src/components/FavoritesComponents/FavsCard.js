@@ -18,6 +18,8 @@ const theme = createTheme({
 const FavsCard = ({ author, datePublished, image, ingredients, instructions, introduction, id, onUpdateRecipe }) => {
 
   const [multiplier, setMultiplier] = useState(1);
+
+
   const handleScalingFactorChange = (event) => {
     setMultiplier(event.target.value);
   };
@@ -52,7 +54,6 @@ const FavsCard = ({ author, datePublished, image, ingredients, instructions, int
 
   return (
     <ThemeProvider theme={theme}>
-
       <Card key={id} style={{ marginBottom: 16 }}>
         <CardHeader
           subheader={datePublished}

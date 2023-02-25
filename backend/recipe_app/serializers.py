@@ -24,9 +24,12 @@ class RecipeSerializer(serializers.ModelSerializer):
         slug_field='name',
         queryset=Tag.objects.all()
     )
+
     class Meta:
         model = Recipe
         fields = '__all__'
+
+
 
 class FavoriteSerializer(serializers.ModelSerializer):
     class Meta:

@@ -10,7 +10,16 @@ from .serializers import *
 from rest_framework.response import Response
 #-->
 
-
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_recipe(request, pk, format=None):
+    try:
+        recipe = Recipe.objects.get(pk=pk)
+    except Recipe.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    serializer = RecipeSerializer(recipe)
+    return Response(serializer.data)
+    
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def create_recipe(request, format=None):
@@ -25,16 +34,6 @@ def create_recipe(request, format=None):
             recipe.tags.add(tag)  
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-@api_view(['GET'])
-@permission_classes([IsAuthenticated])
-def get_recipe(request, pk, format=None):
-    try:
-        recipe = Recipe.objects.get(pk=pk)
-    except Recipe.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
-    serializer = RecipeSerializer(recipe)
-    return Response(serializer.data)
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])

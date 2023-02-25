@@ -4,7 +4,7 @@ import Login from "./components/Login";
 import Navigation from "./components/Navigation";
 import PrivateRoute from "./components/routing/PrivateRoute";
 import RecipeForm from './components/RecipeComponents/RecipeForm';
-import RecipeList from "./components//RecipeComponents/RecipeList";
+import RecipeList from "./components/RecipeComponents/RecipeList";
 import FavsList from "./components/FavoritesComponents/FavsList";
 
 import { Grid } from '@mui/material';
