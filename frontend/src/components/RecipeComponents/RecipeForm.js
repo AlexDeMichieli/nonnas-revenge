@@ -10,6 +10,7 @@ import { AddCircleOutline, RemoveCircleOutline } from "@mui/icons-material";
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import { CircularProgress } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import LunchDiningSharpIcon from '@mui/icons-material/LunchDiningSharp';
 
 const theme = createTheme({
   palette: {
@@ -106,7 +107,7 @@ const RecipeForm = () => {
 
     e.preventDefault();
     const formData = new FormData();
-    if(!image){
+    if (!image) {
       alert('You forgot to add an image!')
       return
     }
@@ -122,7 +123,7 @@ const RecipeForm = () => {
     for (let key of tags) {
       formData.append('tags', key);
     }
-    
+
     client.post("/api/create/", formData)
       .then((response) => {
         console.log(response);
@@ -152,8 +153,8 @@ const RecipeForm = () => {
           <Typography variant="body2" align='center' color="textSecondary" component="p">Recipe magic for you, {username.user}!</Typography>
           <form onSubmit={handleSubmit}>
             <Grid sx={{ mt: 4, mb: 5 }} container justifyContent="space-around" alignItems="baseline" >
-              
-              <Button  startIcon={ !image ? <AddPhotoAlternateIcon/> : <ImageIcon/>}  variant="contained" component="label">
+
+              <Button startIcon={!image ? <AddPhotoAlternateIcon /> : <ImageIcon />} variant="contained" component="label">
                 Upload Image
                 <input
                   hidden
@@ -233,12 +234,16 @@ const RecipeForm = () => {
                   <Grid container justifyContent="center" alignItems="center" item xs={2}>
                     <IconButton
                       color="primary"
+                      className="remove-ingredient"
                       onClick={() => handleRemoveIngredient(index)}
                       disabled={ingredients.length === 1}
                     >
                       <RemoveCircleOutline />
                     </IconButton>
-                    <IconButton color="primary" onClick={handleAddIngredient}>
+                    <IconButton color="primary"
+                      onClick={handleAddIngredient}
+                      className="add-ingredient"
+                    >
                       <AddCircleOutline />
                     </IconButton>
                   </Grid>
@@ -283,12 +288,12 @@ const RecipeForm = () => {
               color="primary"
               type="submit"
               disabled={isLoading}
-              startIcon={!isLoading ? <AddCircleOutline /> : null}
+              startIcon={!isLoading ? <LunchDiningSharpIcon /> : null}
             >
               {buttonText}
               {isLoading && <CircularProgress size={24} />}
-            </Button>          
-            </form>
+            </Button>
+          </form>
         </Box>
       </Paper>
     </ThemeProvider>

@@ -1,14 +1,15 @@
-import React, { useState, useEffect, useContext, createRef } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import client from '../../utils/client';
 import { UserContext } from "../../utils/setContext";
 
-import { Card, Button, Rating, Box, Modal, CardContent, TextField, Typography, Grid } from '@mui/material';
+import { Card, Button, Rating, Box, Modal, CardContent, CardMedia, TextField, Typography, Grid } from '@mui/material';
 import HeartBrokenIcon from '@mui/icons-material/HeartBroken';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import "../../index.css"
 
 const style = {
   position: 'absolute',
@@ -29,7 +30,6 @@ const RecipeCard = ({ image, author, date_published, introduction, ingredients, 
   const [comments, setComments] = useState([]);
   const [content, setContent] = useState('');
   const [open, setOpen] = useState(false);
-  const ref = createRef();
 
 
   const handleOpen = () => setOpen(true);
@@ -123,7 +123,6 @@ const RecipeCard = ({ image, author, date_published, introduction, ingredients, 
       const imgData = canvas.toDataURL("image/png");
       const pdf = new jsPDF();
       pdf.addImage(imgData, "JPEG", 0, 0);
-      // pdf.output('dataurlnewwindow');
       pdf.save("download.pdf");
     });
   };
@@ -131,8 +130,9 @@ const RecipeCard = ({ image, author, date_published, introduction, ingredients, 
   return (
 
     <Grid key={id} item xs={12} sm={6} md={4} sx={{ p: 4 }}>
-      <Card  id="divToPrint" ref={ref}>
-        <img src={image} alt={introduction} />
+      <Card id="divToPrint" class='recipe-card'>
+        <CardMedia  style={{ height: 0, paddingTop: '56.25%' }}
+image={image} alt={introduction} />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             {introduction}
@@ -150,7 +150,6 @@ const RecipeCard = ({ image, author, date_published, introduction, ingredients, 
             <p key={idx}>{tag}</p>
           ))}
           <div>
-
           </div>
           <Grid sx={{ mt: 4, mb: 5 }} container justifyContent="space-around" alignItems="center" >
             {isBookmarked ? (

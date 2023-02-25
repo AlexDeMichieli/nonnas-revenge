@@ -54,7 +54,6 @@ const FavsCard = ({ author, datePublished, image, ingredients, instructions, int
 
   return (
     <ThemeProvider theme={theme}>
-
       <Card key={id} style={{ marginBottom: 16 }}>
         <CardHeader
           subheader={datePublished}
