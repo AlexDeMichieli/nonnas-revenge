@@ -127,7 +127,6 @@ const RecipeForm = () => {
 
     client.post("/api/create/", formData)
       .then((response) => {
-        console.log(response);
         setIsLoading(false);
         setButtonText('Recipe Created!');
       })

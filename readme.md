@@ -51,12 +51,12 @@ yarn install
 
 ### Architecture - Frontend 
 - React Context. The user and a list of bookmarked recipes are saved in the app's store.
-- System to refresh tokens.
+- Refresh tokens via axios interceptors.
 - Search for recipes by using multiple keywords
 - Recipes can be bookmarked and rated. You can also add user comments.
 - You can create your own recipe.
 - You can save a recipe in PDF (work in progress).
-- You can share a recipe image on Facebook (work in progress).
+- You can share a recipe image on Facebook.
 
 # Authentication Endpoints
 The app includes the following endpoints for authenticating users:
