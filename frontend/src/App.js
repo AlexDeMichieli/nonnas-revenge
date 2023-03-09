@@ -6,7 +6,7 @@ import PrivateRoute from "./components/routing/PrivateRoute";
 import RecipeForm from './components/RecipeComponents/RecipeForm';
 import RecipeList from "./components/RecipeComponents/RecipeList";
 import FavsList from "./components/FavoritesComponents/FavsList";
-
+import RecipeCard from "./components/RecipeComponents/RecipeCard";
 import { Grid } from '@mui/material';
 import { Routes, Route } from "react-router-dom";
 import { UserContext } from "./utils/setContext";
@@ -39,6 +39,14 @@ const App = () => {
             element={
               <PrivateRoute>
                 <RecipeList />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/recipe/:id"
+            element={
+              <PrivateRoute>
+                <RecipeCard />
               </PrivateRoute>
             }
           />

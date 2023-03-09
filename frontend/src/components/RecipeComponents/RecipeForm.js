@@ -11,6 +11,7 @@ import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import { CircularProgress } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import LunchDiningSharpIcon from '@mui/icons-material/LunchDiningSharp';
+import "../../index.css"
 
 const theme = createTheme({
   palette: {
@@ -126,7 +127,6 @@ const RecipeForm = () => {
 
     client.post("/api/create/", formData)
       .then((response) => {
-        console.log(response);
         setIsLoading(false);
         setButtonText('Recipe Created!');
       })
@@ -301,7 +301,6 @@ const RecipeForm = () => {
 };
 
 export default RecipeForm;
-
 
 
 

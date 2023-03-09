@@ -25,8 +25,12 @@ body {
   font-weight: 700 !important;
 }
 
+.remove-ingredient:hover {
+  transform: rotate(180deg) !important;
+  transition: 1s;
+}
 
-.css-16vyym4:hover{
+.add-ingredient:hover{
   transform: rotate(360deg) !important;
   transition: 1s;
 }
@@ -37,4 +41,13 @@ body {
 }
 .recipe-card:hover {
   transform: translateY(-5px) !important;
+}
+
+.recipe-rating{
+  margin: 0px !important;
+}
+.spinner{
+  position: fixed; /* or absolute */
+  top: 50%;
+  left: 50%;
 }

@@ -41,7 +41,7 @@ export default function Login() {
     };
     const headerConfig = { headers: { "Content-Type": "application/json" } };
     try {
-      await axios.post(`${window.location.origin}/api/token/`, data, headerConfig).then((res) => {
+      await axios.post(`http://localhost:8000/api/token/`, data, headerConfig).then((res) => {
         const token = {
           access_token: res.data.access,
           refresh_token: res.data.refresh

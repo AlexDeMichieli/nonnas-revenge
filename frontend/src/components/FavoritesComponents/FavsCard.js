@@ -82,7 +82,6 @@ const FavsCard = ({ author, datePublished, image, ingredients, instructions, int
 
             <FormControl fullWidth style={{ marginTop: 16 }}>
               <InputLabel id="scale-recipe">Scale your Recipe</InputLabel>
-
               <Select
                 value={multiplier}
                 onChange={handleScalingFactorChange}
