@@ -1,5 +1,7 @@
 name: "Code Scanning and Threadfix Action "
 #comment
+permissions:
+  contents: write
 on: [ push ]
 #   pull_request:
 #     branches: [main]
